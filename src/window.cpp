@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <gtkmm/scrolledwindow.h>
+
 #include "window.hh"
 #include "headerbar.hh"
 #include "tree_view.hh"
@@ -41,11 +43,15 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
     splitter = new Gtk::HPaned;
     mainLayout->pack_start(*splitter,true,true,0);
 
+    Gtk::ScrolledWindow *scroller1 = new Gtk::ScrolledWindow;
+    scroller1->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC);
+
     TextView *text = new TextView;
     splitter->add2(*text);
 
     TreeView *tree = new TreeView(text);
-    splitter->add1(*tree);
+    scroller1->add(*tree);
+    splitter->add1(*scroller1);
 
 	HeaderBar *header = new HeaderBar(appP);
 	this->set_titlebar(*header);

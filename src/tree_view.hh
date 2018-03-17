@@ -29,6 +29,7 @@
 #include <gtkmm/treeview.h>
 #include <gtkmm/treemodel.h>
 #include <gtkmm/treestore.h>
+#include <gtkmm/scrolledwindow.h>
 #include <vector>
 #include <string>
 
@@ -53,6 +54,7 @@ public:
 protected:
     void on_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn *col);
 private:
+    Gtk::ScrolledWindow *scroller;
     TextView *text;
     TreeModelColRecord record;
     Glib::RefPtr<Gtk::TreeStore> store;
