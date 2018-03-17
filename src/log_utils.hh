@@ -37,4 +37,6 @@ struct LogItem {
 class LogUtils {
 public:
     static std::vector<LogItem> *logItems();
+    static bool isFolder(std::string path);
+    static std::vector<std::string> *filesInFolder(std::string path);
 };
