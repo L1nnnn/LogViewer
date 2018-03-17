@@ -27,6 +27,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 
 #include "log_utils.hh"
 
@@ -102,4 +103,20 @@ std::vector<std::string> *LogUtils::filesInFolder(std::string path) {
     }
 
     return files;
+}
+
+std::string LogUtils::logContent(std::string path) {
+    std::cout << path << std::endl;
+    std::string content = "";
+    std::ifstream reader(path.c_str());
+    if (reader.is_open()) {
+        std::string line = "";
+        while (std::getline(reader,line)) {
+            content+=line+"\n";
+        }
+        reader.close();
+    } else {
+        std::cout << "Error opening file." << std::endl;
+    }
+    return content;
 }

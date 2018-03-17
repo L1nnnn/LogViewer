@@ -57,7 +57,7 @@ void TreeView::addToFolder(std::string folder, std::vector<std::string> *allItem
     for (Gtk::TreeModel::Children::iterator iter = children.begin();
          iter!=children.end(); iter++) {
         Gtk::TreeModel::Row row = *iter;
-        if (row[record.col_text]==folder) {
+        if (std::string(row[record.col_text])==folder) {
             for (int i = 0; i<allItems->size(); i++) {
                 Gtk::TreeModel::Row sub = *(store->append(row.children()));
                 sub[record.col_text] = allItems->at(i);
@@ -89,11 +89,15 @@ void TreeView::on_activated(const Gtk::TreeModel::Path &path, Gtk::TreeViewColum
     Gtk::TreeModel::iterator iter = store->get_iter(path);
     if (iter) {
         Gtk::TreeModel::Row row = *iter;
-        std::cout << row[record.col_text] << std::endl;
         if (row.children().size()==0) {
-            text->set_text(row[record.col_text]+"\nNo Children");
+            std::string title = "/var/log/";
+            title+=row[record.col_text];
+            std::string content = LogUtils::logContent(title);
+            text->set_text(content);
         } else {
-            text->set_text(row[record.col_text]+"\nChildren");
+            Glib::ustring part1 = Glib::ustring(row[record.col_text]);
+            part1+="\nChildren";
+            text->set_text(part1);
         }
     }
 }

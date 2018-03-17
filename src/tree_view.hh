@@ -41,7 +41,7 @@ public:
         this->add(col_text);
         this->add(row_num);
     }
-    Gtk::TreeModelColumn<Glib::ustring> col_text;
+    Gtk::TreeModelColumn<std::string> col_text;
     Gtk::TreeModelColumn<int> row_num;
 };
 
