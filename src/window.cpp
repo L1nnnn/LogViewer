@@ -27,6 +27,7 @@
 #include "window.hh"
 #include "headerbar.hh"
 #include "tree_view.hh"
+#include "text_view.hh"
 
 AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 	app = appP;
@@ -39,6 +40,9 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 
     splitter = new Gtk::HPaned;
     mainLayout->pack_start(*splitter,true,true,0);
+
+    TextView *text = new TextView;
+    splitter->add2(*text);
 
     TreeView *tree = new TreeView;
     splitter->add1(*tree);
