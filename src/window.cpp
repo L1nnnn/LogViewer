@@ -27,12 +27,25 @@
 #include "window.hh"
 #include "headerbar.hh"
 
+#include <gtkmm/label.h>
+
 AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 	app = appP;
 	
 	this->set_title("LogViewer");
 	this->set_default_size(800,600);
 	
+    mainLayout = new Gtk::VBox(false,0);
+    this->add(*mainLayout);
+
+    splitter = new Gtk::HPaned;
+    mainLayout->pack_start(*splitter,true,true,0);
+
 	HeaderBar *header = new HeaderBar(appP);
 	this->set_titlebar(*header);
+}
+
+AppWindow::~AppWindow() {
+    delete mainLayout;
+    delete splitter;
 }

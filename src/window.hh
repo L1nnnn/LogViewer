@@ -28,10 +28,15 @@
 
 #include <gtkmm/window.h>
 #include <gtkmm/application.h>
+#include <gtkmm/hvbox.h>
+#include <gtkmm/hvpaned.h>
 
 class AppWindow : public Gtk::Window {
 public:
 	explicit AppWindow(Glib::RefPtr<Gtk::Application> appP);
+    ~AppWindow();
 private:
 	Glib::RefPtr<Gtk::Application> app;
+    Gtk::VBox *mainLayout;
+    Gtk::HPaned *splitter;
 };
