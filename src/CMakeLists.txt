@@ -5,6 +5,7 @@ set(BASE_SRC
 	main.cpp
 	window.cpp
 	headerbar.cpp
+	main_menu_button.cpp
 )
 
 set(SRC

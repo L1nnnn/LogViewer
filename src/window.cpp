@@ -33,6 +33,6 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 	this->set_title("LogViewer");
 	this->set_default_size(800,600);
 	
-	HeaderBar *header = new HeaderBar;
+	HeaderBar *header = new HeaderBar(appP);
 	this->set_titlebar(*header);
 }

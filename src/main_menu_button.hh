@@ -26,10 +26,14 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <gtkmm/headerbar.h>
+#include <gtkmm/menubutton.h>
 #include <gtkmm/application.h>
+#include <gtkmm/menu.h>
 
-class HeaderBar : public Gtk::HeaderBar {
+class MainMenuButton : public Gtk::MenuButton {
 public:
-	explicit HeaderBar(Glib::RefPtr<Gtk::Application> appP);
+	explicit MainMenuButton(Glib::RefPtr<Gtk::Application> appP);
+private:
+	Glib::RefPtr<Gtk::Application> app;
+	Gtk::Menu *menu;
 };

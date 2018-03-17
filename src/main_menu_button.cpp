@@ -24,12 +24,12 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#pragma once
+#include "main_menu_button.hh"
 
-#include <gtkmm/headerbar.h>
-#include <gtkmm/application.h>
-
-class HeaderBar : public Gtk::HeaderBar {
-public:
-	explicit HeaderBar(Glib::RefPtr<Gtk::Application> appP);
-};
+MainMenuButton::MainMenuButton(Glib::RefPtr<Gtk::Application> appP) {
+	app = appP;
+	this->set_label("Menu");
+	
+	menu = new Gtk::Menu;
+	this->set_popup(*menu);
+}
