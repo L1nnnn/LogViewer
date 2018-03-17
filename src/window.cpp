@@ -26,8 +26,7 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "window.hh"
 #include "headerbar.hh"
-
-#include <gtkmm/label.h>
+#include "tree_view.hh"
 
 AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 	app = appP;
@@ -40,6 +39,9 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 
     splitter = new Gtk::HPaned;
     mainLayout->pack_start(*splitter,true,true,0);
+
+    TreeView *tree = new TreeView;
+    splitter->add1(*tree);
 
 	HeaderBar *header = new HeaderBar(appP);
 	this->set_titlebar(*header);
