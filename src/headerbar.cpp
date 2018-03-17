@@ -24,15 +24,9 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include "window.hh"
 #include "headerbar.hh"
 
-AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
-	app = appP;
-	
+HeaderBar::HeaderBar() {
 	this->set_title("LogViewer");
-	this->set_default_size(800,600);
-	
-	HeaderBar *header = new HeaderBar;
-	this->set_titlebar(*header);
+	this->set_show_close_button(true);
 }

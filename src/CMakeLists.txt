@@ -4,6 +4,7 @@ project(LogViewer_src)
 set(BASE_SRC
 	main.cpp
 	window.cpp
+	headerbar.cpp
 )
 
 set(SRC
