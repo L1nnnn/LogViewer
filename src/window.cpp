@@ -44,10 +44,13 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
     mainLayout->pack_start(*splitter,true,true,0);
 
     Gtk::ScrolledWindow *scroller1 = new Gtk::ScrolledWindow;
+    Gtk::ScrolledWindow *scroller2 = new Gtk::ScrolledWindow;
     scroller1->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC);
+    scroller2->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC);
 
     TextView *text = new TextView;
-    splitter->add2(*text);
+    scroller2->add(*text);
+    splitter->add2(*scroller2);
 
     TreeView *tree = new TreeView(text);
     scroller1->add(*tree);
