@@ -44,7 +44,7 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
     TextView *text = new TextView;
     splitter->add2(*text);
 
-    TreeView *tree = new TreeView;
+    TreeView *tree = new TreeView(text);
     splitter->add1(*tree);
 
 	HeaderBar *header = new HeaderBar(appP);

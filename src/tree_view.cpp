@@ -29,7 +29,9 @@
 
 #include "tree_view.hh"
 
-TreeView::TreeView() {
+TreeView::TreeView(TextView *txtView) {
+    text = txtView;
+
     auto logs = this->items();
 
     store = Gtk::TreeStore::create(record);
@@ -81,10 +83,9 @@ void TreeView::on_activated(const Gtk::TreeModel::Path &path, Gtk::TreeViewColum
         Gtk::TreeModel::Row row = *iter;
         std::cout << row[record.col_text] << std::endl;
         if (row.children().size()==0) {
-            std::cout << "No Children" << std::endl;
+            text->set_text(row[record.col_text]+"\nNo Children");
         } else {
-            std::cout << "Children" << std::endl;
+            text->set_text(row[record.col_text]+"\nChildren");
         }
-        std::cout << std::endl;
     }
 }

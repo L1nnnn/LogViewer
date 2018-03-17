@@ -32,6 +32,8 @@
 #include <vector>
 #include <string>
 
+#include "text_view.hh"
+
 class TreeModelColRecord : public Gtk::TreeModelColumnRecord {
 public:
     TreeModelColRecord() {
@@ -44,13 +46,14 @@ public:
 
 class TreeView : public Gtk::TreeView {
 public:
-    TreeView();
+    explicit TreeView(TextView *txtView);
     void addBaseItems(std::vector<std::string> *allItems);
     void addToFolder(std::string folder, std::vector<std::string> *allItems);
     std::vector<std::string> *items();
 protected:
     void on_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn *col);
 private:
+    TextView *text;
     TreeModelColRecord record;
     Glib::RefPtr<Gtk::TreeStore> store;
 };
