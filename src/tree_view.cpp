@@ -31,13 +31,16 @@
 TreeView::TreeView() {
     auto logs = this->items();
 
-    TreeModelColRecord record;
-    Glib::RefPtr<Gtk::TreeStore> store = Gtk::TreeStore::create(record);
+    store = Gtk::TreeStore::create(record);
     this->set_model(store);
 
-    for (int i = 0; i<logs->size(); i++) {
+    addBaseItems(logs);
+}
+
+void TreeView::addBaseItems(std::vector<std::string> *allItems) {
+    for (int i = 0; i<allItems->size(); i++) {
         Gtk::TreeModel::Row row = *(store->append());
-        row[record.col_text] = logs->at(i);
+        row[record.col_text] = allItems->at(i);
     }
 
     this->append_column("Logs",record.col_text);

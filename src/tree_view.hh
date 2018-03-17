@@ -28,6 +28,7 @@
 
 #include <gtkmm/treeview.h>
 #include <gtkmm/treemodel.h>
+#include <gtkmm/treestore.h>
 #include <vector>
 #include <string>
 
@@ -42,5 +43,9 @@ public:
 class TreeView : public Gtk::TreeView {
 public:
     TreeView();
+    void addBaseItems(std::vector<std::string> *allItems);
     std::vector<std::string> *items();
+private:
+    TreeModelColRecord record;
+    Glib::RefPtr<Gtk::TreeStore> store;
 };
