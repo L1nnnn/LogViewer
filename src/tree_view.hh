@@ -44,6 +44,7 @@ class TreeView : public Gtk::TreeView {
 public:
     TreeView();
     void addBaseItems(std::vector<std::string> *allItems);
+    void addToFolder(std::string folder, std::vector<std::string> *allItems);
     std::vector<std::string> *items();
 private:
     TreeModelColRecord record;
