@@ -24,36 +24,10 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#pragma once
+#include "log_utils.hh"
 
-#include <gtkmm/treeview.h>
-#include <gtkmm/treemodel.h>
-#include <gtkmm/treestore.h>
-#include <vector>
-#include <string>
+std::vector<LogItem> *LogUtils::logItems() {
+    std::vector<LogItem> *logs = new std::vector<LogItem>();
 
-#include "text_view.hh"
-
-class TreeModelColRecord : public Gtk::TreeModelColumnRecord {
-public:
-    TreeModelColRecord() {
-        this->add(col_text);
-        this->add(row_num);
-    }
-    Gtk::TreeModelColumn<Glib::ustring> col_text;
-    Gtk::TreeModelColumn<int> row_num;
-};
-
-class TreeView : public Gtk::TreeView {
-public:
-    explicit TreeView(TextView *txtView);
-    void addBaseItems(std::vector<std::string> *allItems);
-    void addToFolder(std::string folder, std::vector<std::string> *allItems);
-    void load();
-protected:
-    void on_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn *col);
-private:
-    TextView *text;
-    TreeModelColRecord record;
-    Glib::RefPtr<Gtk::TreeStore> store;
-};
+    return logs;
+}

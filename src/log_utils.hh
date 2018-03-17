@@ -26,34 +26,15 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <gtkmm/treeview.h>
-#include <gtkmm/treemodel.h>
-#include <gtkmm/treestore.h>
 #include <vector>
 #include <string>
 
-#include "text_view.hh"
-
-class TreeModelColRecord : public Gtk::TreeModelColumnRecord {
-public:
-    TreeModelColRecord() {
-        this->add(col_text);
-        this->add(row_num);
-    }
-    Gtk::TreeModelColumn<Glib::ustring> col_text;
-    Gtk::TreeModelColumn<int> row_num;
+struct LogItem {
+    std::string log;
+    std::vector<std::string> *logChildren;
 };
 
-class TreeView : public Gtk::TreeView {
+class LogUtils {
 public:
-    explicit TreeView(TextView *txtView);
-    void addBaseItems(std::vector<std::string> *allItems);
-    void addToFolder(std::string folder, std::vector<std::string> *allItems);
-    void load();
-protected:
-    void on_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn *col);
-private:
-    TextView *text;
-    TreeModelColRecord record;
-    Glib::RefPtr<Gtk::TreeStore> store;
+    static std::vector<LogItem> *logItems();
 };

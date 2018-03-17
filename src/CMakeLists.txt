@@ -8,6 +8,7 @@ set(BASE_SRC
 	main_menu_button.cpp
         tree_view.cpp
         text_view.cpp
+        log_utils.cpp
 )
 
 set(SRC

@@ -28,17 +28,15 @@
 #include <iostream>
 
 #include "tree_view.hh"
+#include "log_utils.hh"
 
 TreeView::TreeView(TextView *txtView) {
     text = txtView;
 
-    auto logs = this->items();
-
     store = Gtk::TreeStore::create(record);
     this->set_model(store);
 
-    addBaseItems(logs);
-    addToFolder("item2",logs);
+    this->load();
 
     this->signal_row_activated().connect(sigc::mem_fun(*this,&TreeView::on_activated));
 }
@@ -69,12 +67,22 @@ void TreeView::addToFolder(std::string folder, std::vector<std::string> *allItem
     }
 }
 
-std::vector<std::string> *TreeView::items() {
-    std::vector<std::string> *logs = new std::vector<std::string>();
-    logs->push_back("item1");
-    logs->push_back("item2");
-    logs->push_back("item3");
-    return logs;
+void TreeView::load() {
+    auto list = LogUtils::logItems();
+
+    std::vector<std::string> *baseItems = new std::vector<std::string>();
+    for (int i = 0; i<list->size(); i++) {
+        LogItem current = list->at(i);
+        baseItems->push_back(current.log);
+    }
+    addBaseItems(baseItems);
+
+    for (int i = 0; i<list->size(); i++) {
+        LogItem current = list->at(i);
+        if (current.logChildren->size()!=0) {
+            addToFolder(current.log,current.logChildren);
+        }
+    }
 }
 
 void TreeView::on_activated(const Gtk::TreeModel::Path &path, Gtk::TreeViewColumn *col) {
