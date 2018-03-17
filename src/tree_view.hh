@@ -36,8 +36,10 @@ class TreeModelColRecord : public Gtk::TreeModelColumnRecord {
 public:
     TreeModelColRecord() {
         this->add(col_text);
+        this->add(row_num);
     }
     Gtk::TreeModelColumn<Glib::ustring> col_text;
+    Gtk::TreeModelColumn<int> row_num;
 };
 
 class TreeView : public Gtk::TreeView {
@@ -46,6 +48,8 @@ public:
     void addBaseItems(std::vector<std::string> *allItems);
     void addToFolder(std::string folder, std::vector<std::string> *allItems);
     std::vector<std::string> *items();
+protected:
+    void on_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn *col);
 private:
     TreeModelColRecord record;
     Glib::RefPtr<Gtk::TreeStore> store;

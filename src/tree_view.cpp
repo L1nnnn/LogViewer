@@ -37,12 +37,15 @@ TreeView::TreeView() {
 
     addBaseItems(logs);
     addToFolder("item2",logs);
+
+    this->signal_row_activated().connect(sigc::mem_fun(*this,&TreeView::on_activated));
 }
 
 void TreeView::addBaseItems(std::vector<std::string> *allItems) {
     for (int i = 0; i<allItems->size(); i++) {
         Gtk::TreeModel::Row row = *(store->append());
         row[record.col_text] = allItems->at(i);
+        row[record.row_num] = 1;
     }
 
     this->append_column("Logs",record.col_text);
@@ -58,6 +61,7 @@ void TreeView::addToFolder(std::string folder, std::vector<std::string> *allItem
             for (int i = 0; i<allItems->size(); i++) {
                 Gtk::TreeModel::Row sub = *(store->append(row.children()));
                 sub[record.col_text] = allItems->at(i);
+                sub[record.row_num] = 2;
             }
         }
     }
@@ -69,4 +73,18 @@ std::vector<std::string> *TreeView::items() {
     logs->push_back("item2");
     logs->push_back("item3");
     return logs;
+}
+
+void TreeView::on_activated(const Gtk::TreeModel::Path &path, Gtk::TreeViewColumn *col) {
+    Gtk::TreeModel::iterator iter = store->get_iter(path);
+    if (iter) {
+        Gtk::TreeModel::Row row = *iter;
+        std::cout << row[record.col_text] << std::endl;
+        if (row.children().size()==0) {
+            std::cout << "No Children" << std::endl;
+        } else {
+            std::cout << "Children" << std::endl;
+        }
+        std::cout << std::endl;
+    }
 }
