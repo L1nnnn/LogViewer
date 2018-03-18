@@ -89,15 +89,27 @@ void TreeView::on_activated(const Gtk::TreeModel::Path &path, Gtk::TreeViewColum
     Gtk::TreeModel::iterator iter = store->get_iter(path);
     if (iter) {
         Gtk::TreeModel::Row row = *iter;
-        if (row.children().size()==0) {
-            std::string title = "/var/log/";
-            title+=row[record.col_text];
-            std::string content = LogUtils::logContent(title);
-            text->set_text(content);
-        } else {
-            Glib::ustring part1 = Glib::ustring(row[record.col_text]);
-            part1+="\nChildren";
-            text->set_text(part1);
+        Gtk::TreeModel::Row parent = *(row->parent());
+        std::string title = "/var/log/";
+
+        if (parent) {
+            std::string parentStr = parent[record.col_text];
+            title+=parentStr+"/";
         }
+
+        if (row.children().size()>0) {
+            return;
+        }
+
+        std::string childStr = row[record.col_text];
+        if (childStr=="(Empty)") {
+            return;
+        }
+
+        title+=childStr;
+        std::cout << title << std::endl;
+
+        std::string content = LogUtils::logContent(title);
+        text->set_text(content);
     }
 }
