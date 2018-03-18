@@ -28,6 +28,7 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include <gtkmm/messagedialog.h>
 
 #include "log_utils.hh"
 
@@ -116,7 +117,9 @@ std::string LogUtils::logContent(std::string path) {
         }
         reader.close();
     } else {
-        std::cout << "Error opening file." << std::endl;
+        Gtk::MessageDialog dialog("Unable to open file!",false,Gtk::MESSAGE_ERROR,Gtk::BUTTONS_OK,true);
+        dialog.set_secondary_text("You probably have insufficient privileges.",false);
+        dialog.run();
     }
     return content;
 }
