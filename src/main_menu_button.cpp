@@ -32,4 +32,15 @@ MainMenuButton::MainMenuButton(Glib::RefPtr<Gtk::Application> appP) {
 	
 	menu = new Gtk::Menu;
 	this->set_popup(*menu);
+
+    quit = new Gtk::MenuItem;
+    quit->set_label("Quit");
+    quit->signal_activate().connect(sigc::mem_fun(*this,&MainMenuButton::on_quit_clicked));
+    menu->append(*quit);
+
+    menu->show_all_children();
+}
+
+void MainMenuButton::on_quit_clicked() {
+    app->quit();
 }

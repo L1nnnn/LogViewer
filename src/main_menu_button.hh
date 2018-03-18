@@ -36,4 +36,7 @@ public:
 private:
 	Glib::RefPtr<Gtk::Application> app;
 	Gtk::Menu *menu;
+    Gtk::MenuItem *quit;
+
+    void on_quit_clicked();
 };
