@@ -30,6 +30,11 @@
 #include <gtkmm/application.h>
 #include <gtkmm/hvbox.h>
 #include <gtkmm/hvpaned.h>
+#include <gtkmm/scrolledwindow.h>
+
+#include "tree_view.hh"
+#include "text_view.hh"
+#include "headerbar.hh"
 
 class AppWindow : public Gtk::Window {
 public:
@@ -39,4 +44,8 @@ private:
 	Glib::RefPtr<Gtk::Application> app;
     Gtk::VBox *mainLayout;
     Gtk::HPaned *splitter;
+    Gtk::ScrolledWindow *scroller1, *scroller2;
+    TextView *text;
+    TreeView *tree;
+    HeaderBar *header;
 };

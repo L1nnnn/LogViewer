@@ -29,7 +29,12 @@
 #include <gtkmm/headerbar.h>
 #include <gtkmm/application.h>
 
+#include "main_menu_button.hh"
+
 class HeaderBar : public Gtk::HeaderBar {
 public:
 	explicit HeaderBar(Glib::RefPtr<Gtk::Application> appP);
+    ~HeaderBar();
+private:
+    MainMenuButton *menuButton;
 };

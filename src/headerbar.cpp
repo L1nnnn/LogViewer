@@ -25,12 +25,15 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "headerbar.hh"
-#include "main_menu_button.hh"
 
 HeaderBar::HeaderBar(Glib::RefPtr<Gtk::Application> appP) {
 	this->set_title("LogViewer");
 	this->set_show_close_button(true);
 	
-	MainMenuButton *menuButton = new MainMenuButton(appP);
+    menuButton = new MainMenuButton(appP);
 	this->pack_start(*menuButton);
+}
+
+HeaderBar::~HeaderBar() {
+    delete menuButton;
 }
