@@ -36,7 +36,8 @@ AppWindow::AppWindow(Glib::RefPtr<Gtk::Application> appP) {
 	
 	this->set_title("LogViewer");
 	this->set_default_size(800,600);
-	
+    this->set_icon_name("logview");
+
     mainLayout = new Gtk::VBox(false,0);
     this->add(*mainLayout);
 
