@@ -6,9 +6,9 @@ set(BASE_SRC
 	window.cpp
 	headerbar.cpp
 	main_menu_button.cpp
-        tree_view.cpp
-        text_view.cpp
-        log_utils.cpp
+	tree_view.cpp
+	text_view.cpp
+	log_utils.cpp
 )
 
 set(SRC
@@ -23,3 +23,10 @@ add_executable(LogViewer ${SRC})
 target_link_libraries(LogViewer
 	${GTKMM_LIBRARIES}
 )
+
+if (UNIX)
+	if (APPLE)
+	else()
+		install(TARGETS LogViewer DESTINATION /usr/bin)
+	endif()
+endif()

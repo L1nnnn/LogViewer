@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=LogViewer
+Exec=LogViewer
+Icon=logview
+Encoding=UTF-8
+Comment=View system logs
+Categories=System
